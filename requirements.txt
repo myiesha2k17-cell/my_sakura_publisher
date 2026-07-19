@@ -1,0 +1,6 @@
+# Core libraries for PDF generation and manipulation
+reportlab>=4.2.0
+PyPDF2>=3.0.0
+
+# Library for the web interface
+streamlit>=1.37.0
