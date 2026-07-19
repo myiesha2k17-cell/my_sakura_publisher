@@ -1,34 +1,31 @@
 import streamlit as st
 import os
-import zipfile
-from io import BytesIO
+from master_publisher import run_master_publisher
 
-# Import your publisher logic here
-# from master_publisher import run_master_publisher
+st.set_page_config(page_title="Sakura Series Studio", layout="centered")
 
-st.set_page_config(page_title="Sakura Series Publisher", layout="centered")
+st.title("🌸 Sakura Series Production")
 
-st.title("🌸 Sakura Series Publisher")
-st.write("Generate your KDP interiors and metadata on the go.")
+# 1. Automatically find all CSVs in the /data folder
+data_folder = "data"
+csv_files = [f for f in os.listdir(data_folder) if f.endswith(".csv")]
 
-if st.button("Generate Full Series"):
-    with st.spinner("Engineering your PDFs..."):
-        # run_master_publisher() # This runs your series logic
+# 2. Dropdown for user to select the journal
+selected_file = st.selectbox("Select a Series Journal to Generate:", csv_files)
 
-        # Create a zip file of all outputs for easy downloading
-        zip_buffer = BytesIO()
-        with zipfile.ZipFile(zip_buffer, "a", zipfile.ZIP_DEFLATED, False) as zip_file:
-            for root, dirs, files in os.walk("."):
-                for file in files:
-                    if file.endswith((".pdf", ".txt")):
-                        zip_file.write(os.path.join(root, file))
+# 3. Text input for output file name
+series_name = st.text_input("Name the Output PDF:",
+                            value=selected_file.replace("_prompts.csv", "").replace("sakura_", "").title())
 
-        st.success("Series generated successfully!")
-        st.download_button(
-            label="Download All Journals & Metadata",
-            data=zip_buffer.getvalue(),
-            file_name="Sakura_Series_Production.zip",
-            mime="application/zip"
-        )
+if st.button("Generate Selected Journal"):
+    with st.spinner(f"Generating {series_name}..."):
+        csv_path = os.path.join(data_folder, selected_file)
+        output_name = f"{series_name.replace(' ', '_')}_Journal.pdf"
 
-st.info("Ensure template.pdf and all *_prompts.csv files are in the repository.")
+        # Call the logic from master_publisher
+        run_master_publisher(csv_path, output_name)
+
+        with open(output_name, "rb") as f:
+            st.download_button("Download PDF", f, file_name=output_name)
+
+        st.success("Finished!")

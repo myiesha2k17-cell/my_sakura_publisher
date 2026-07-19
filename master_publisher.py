@@ -1,66 +1,96 @@
 import csv
+import io
 import os
 from PyPDF2 import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
-import io
 
-# --- CONFIGURATION ---
-SERIES_TITLES = [
-    "Sakura Self-Esteem", "Sakura Clarity", "Sakura Calm", "Sakura Gratitude",
-    "Sakura Resilience", "Sakura Abundance", "Sakura Boundaries", "Sakura Presence",
-    "Sakura Creativity", "Sakura Reflection"
-]
+# Define the structure for the phases
+PHASES = {
+    1: {"title": "Phase 1: Foundation", "days": "Days 01-10", "focus": "Awareness & Acceptance"},
+    2: {"title": "Phase 2: Growth", "days": "Days 11-20", "focus": "Empowerment & Action"},
+    3: {"title": "Phase 3: Integration", "days": "Days 21-30", "focus": "Resilience & Radiance"}
+}
 
 
-def create_promo_page():
+def create_phase_page(phase_num):
     packet = io.BytesIO()
-    can = canvas.Canvas(packet, pagesize=(432, 648))  # 6x9 inches
-    can.setFont("Helvetica-Bold", 16)
-    can.drawString(50, 600, "Continue Your Journey")
-    can.setFont("Helvetica", 12)
-    for i, title in enumerate(SERIES_TITLES):
-        can.drawString(50, 560 - (i * 25), f"Vol {i + 1:02d}: {title}")
+    can = canvas.Canvas(packet, pagesize=(432, 648))
+    can.setFont("Helvetica-Bold", 24)
+    can.drawString(50, 400, PHASES[phase_num]["title"])
+    can.setFont("Helvetica", 16)
+    can.drawString(50, 370, PHASES[phase_num]["days"])
+    can.drawString(50, 340, f"Focus: {PHASES[phase_num]['focus']}")
     can.save()
     packet.seek(0)
     return packet
 
 
-def export_metadata(title, index):
-    """Generates SEO-friendly KDP metadata."""
-    filename = f"KDP_Metadata_Vol{index:02d}.txt"
-    content = f"""Title: {title}: A 30-Day Guided Journal
-Subtitle: Mindfulness, Growth, and Daily Reflection for Personal Development
-Keywords: self-help, {title.split()[-1].lower()}, guided journal, 30 day challenge, mindfulness, personal growth, sakura series
-Description: Transform your mindset with {title}. This 30-day guided journal is designed to help you build habits, find clarity, and cultivate lasting peace. Part of the exclusive Sakura Series."""
-    with open(filename, "w") as f:
-        f.write(content)
+def create_reflection_page():
+    packet = io.BytesIO()
+    can = canvas.Canvas(packet, pagesize=(432, 648))
+    can.setFont("Helvetica-Bold", 20)
+    can.drawString(50, 600, "Monthly Reflection")
+    can.setFont("Helvetica", 12)
+    can.drawString(50, 560, "1. What was your biggest win this month?")
+    can.drawString(50, 530, "2. What challenge did you overcome?")
+    can.drawString(50, 500, "3. What do you want to carry forward?")
+    can.save()
+    packet.seek(0)
+    return packet
 
 
-def run_master_publisher():
-    promo_reader = PdfReader(create_promo_page())
+def create_text_page(prompt):
+    packet = io.BytesIO()
+    can = canvas.Canvas(packet, pagesize=(432, 648))
+    can.setFont("Helvetica", 12)
+    # Simple text wrapping logic for the prompt
+    text = can.beginText(50, 500)
+    text.setFont("Helvetica", 12)
+    text.textLines(prompt)
+    can.drawText(text)
+    can.save()
+    packet.seek(0)
+    return packet
 
-    for i, title in enumerate(SERIES_TITLES):
-        idx = i + 1
-        safe_title = title.replace(' ', '')
-        output_pdf = f"SakuraSeries_Vol{idx:02d}_{safe_title}.pdf"
-        csv_file = f"{title.lower().replace(' ', '_')}_prompts.csv"
 
-        # 1. Create Interior (Logic from previous steps)
-        writer = PdfWriter()
-        with open(csv_file, 'r', encoding='utf-8') as f:
-            reader = csv.DictReader(f)
-            for row in reader:
-                # Add page logic here (using template injection)
-                # For brevity, assumes a simple blank page logic
-                writer.add_page(PdfReader("template.pdf").pages[0])
+def run_master_publisher(csv_path, output_name):
+    writer = PdfWriter()
+    template_reader = PdfReader("template.pdf")
+    template_page = template_reader.pages[0]
 
-        # 2. Add Promo Page
-        writer.add_page(promo_reader.pages[0])
+    with open(csv_path, 'r', encoding='utf-8') as f:
+        reader = list(csv.DictReader(f))
 
-        # 3. Save PDF and Metadata
-        with open(output_pdf, "wb") as f:
-            writer.write(f)
-        export_metadata(title, idx)
-        print(f"Published: {output_pdf} and Metadata for {title}")
+        for index, row in enumerate(reader):
+            day = index + 1
+            prompt = row.get("Prompt", "")
 
-# run_master_publisher()
+            # 1. Add Phase Intro Page
+            if day in [1, 11, 21]:
+                phase_num = 1 if day <= 10 else 2 if day <= 20 else 3
+                phase_packet = create_phase_page(phase_num)
+                writer.add_page(PdfReader(phase_packet).pages[0])
+
+            # 2. Add Day Page with Merged Text
+            text_packet = create_text_page(prompt)
+            text_page = PdfReader(text_packet).pages[0]
+
+            # Create new blank page and merge layers
+            page_to_add = writer.add_blank_page(width=template_page.mediabox.width,
+                                                height=template_page.mediabox.height)
+            page_to_add.merge_page(template_page)
+            page_to_add.merge_page(text_page)
+
+            # 3. Add Monthly Reflection every 10 iterations
+            if day % 10 == 0:
+                reflection_packet = create_reflection_page()
+                writer.add_page(PdfReader(reflection_packet).pages[0])
+
+    with open(output_name, "wb") as f:
+        writer.write(f)
+    print(f"Successfully created {output_name}")
+
+
+if __name__ == "__main__":
+    # Example usage
+    run_master_publisher("data/sakura_self_esteem_prompts.csv", "Self_Esteem_Journal.pdf")
