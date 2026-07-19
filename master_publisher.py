@@ -1,6 +1,7 @@
 import csv
 import io
 import os
+import textwrap  # ADDED THIS
 from PyPDF2 import PdfReader, PdfWriter
 from reportlab.pdfgen import canvas
 
@@ -39,14 +40,20 @@ def create_reflection_page():
     return packet
 
 
+# FIXED: Added text wrapping here
 def create_text_page(prompt):
     packet = io.BytesIO()
     can = canvas.Canvas(packet, pagesize=(432, 648))
     can.setFont("Helvetica", 12)
-    # Simple text wrapping logic for the prompt
+
+    # Wrap text to 60 characters wide
+    lines = textwrap.wrap(prompt, width=60)
+
     text = can.beginText(50, 500)
     text.setFont("Helvetica", 12)
-    text.textLines(prompt)
+    for line in lines:
+        text.textLine(line)
+
     can.drawText(text)
     can.save()
     packet.seek(0)
@@ -89,8 +96,3 @@ def run_master_publisher(csv_path, output_name):
     with open(output_name, "wb") as f:
         writer.write(f)
     print(f"Successfully created {output_name}")
-
-
-if __name__ == "__main__":
-    # Example usage
-    run_master_publisher("data/sakura_self_esteem_prompts.csv", "Self_Esteem_Journal.pdf")
