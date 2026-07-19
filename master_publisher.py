@@ -1,3 +1,6 @@
+import os
+print("Does template.pdf exist?", os.path.exists("template.pdf"))
+
 import csv
 import io
 import os
