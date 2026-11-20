@@ -173,6 +173,12 @@ The journal generator stays as its own page.
 - Output: finished, ready-to-post videos plus post text ("like a finished Zeely ad").
 - Visual style: faceless book-aesthetic, no avatars in v1.
 - Build: Streamlit Shorts Studio with a reusable engine.
+- **Accounts:** everything posts from the single Hanako Design & Media account on each
+  platform. Authors are presented as "a Hanako author", e.g. "Ren Hawthorn's new novel". The
+  narration may still use the author's first-person voice for excerpts and reflections. The end
+  card and CTA always point to the Hanako link in bio. Hashtags mix brand tags with tags
+  suited to the book type.
+- **Catalog to start:** the owner's 2 published Amazon books.
 
 ## 8. Builder's calls (proposed defaults, owner may override)
 - Providers:
