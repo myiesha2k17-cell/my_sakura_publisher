@@ -1,4 +1,4 @@
-# Starting Catalog — Draft for Owner Approval
+# Starting Catalog — Approved by Owner (2026-11-20)
 
 Drafted from the manuscripts and covers in the Hanako Google Drive. Quotes are copied
 verbatim from the manuscripts. Blurbs, tropes and "vibes" lines are drafts. **Nothing goes
@@ -12,7 +12,7 @@ Both books are by **Ren Hawthorne** (spelled with an "e" on both covers and titl
 - **Series:** An Adebayo Ledger Novel, Book One (Book Two, *The River's Due*, is announced in the book)
 - **Author / voice:** Ren Hawthorne
 - **Type:** fiction (contemporary mythic fantasy)
-- **Amazon:** https://a.co/d/0aPWMork (short link; still to confirm which link is which book)
+- **Amazon:** https://a.co/d/0dXjLJ2d
 - **Cover:** `assets/covers/the_ledger.jpg`. Palette: indigo night, amber crossroads glow.
 
 **Draft blurb (spoiler-free, from the prologue and chapters 1–2)**
@@ -49,7 +49,7 @@ horror.
 - **Series:** A Keeper Novel (Book Two is announced in the book)
 - **Author / voice:** Ren Hawthorne
 - **Type:** fiction (quiet / cozy fantasy)
-- **Amazon:** https://a.co/d/0dXjLJ2d (short link; still to confirm which link is which book)
+- **Amazon:** https://a.co/d/0aPWMork
 - **Cover:** `assets/covers/the_ones_nobody_came_for.jpg`. Palette: dusk blue, warm barn-light amber.
 
 **Draft blurb (spoiler-free, from chapters 1–2)**

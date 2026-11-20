@@ -1,7 +1,7 @@
 # Shorts Studio — Design
 
 **Date:** 2026-11-20
-**Status:** Draft, awaiting owner approval
+**Status:** Approved by owner 2026-11-20
 **Repo:** `my_sakura_publisher`
 
 ## 1. Intent and the why
@@ -189,11 +189,15 @@ The journal generator stays as its own page.
 
 ## 8. Builder's calls (proposed defaults, owner may override)
 - Providers:
-  - Anthropic Claude for script and guardrail, using the latest Claude Sonnet model for cost
-    with an option to switch to Opus
+  - Anthropic Claude (`claude-opus-5-5` by default, configurable via `SHORTS_CLAUDE_MODEL`)
+    for script and guardrail, using structured outputs (`messages.parse` with Pydantic models).
+    At about 5k tokens in and 2k out per script, that's a few cents per short
   - ElevenLabs for voice
-  - one image API, chosen at build time for quality, cost and 9:16 support
-  - MoviePy + ffmpeg for rendering
+  - images: OpenAI `gpt-image-1` at 1024x1536 when an `OPENAI_API_KEY` is set. Otherwise a
+    built-in "cover-only" mode makes every scene from the book cover (crops, blur, gradient)
+    so shorts can render with no image key
+  - ffmpeg (subprocess) for rendering: zoompan for Ken Burns motion, libass (ASS file) for
+    word-timed captions, Pillow for text cards and the end card
 - Catalog and voice profiles as YAML in the repo, so the owner can edit them on GitHub from a phone.
 - Music: a small bundled royalty-free library. The owner can add tracks.
 - Output length targets: 20–45s. YouTube title ≤ 100 chars. Caption lengths kept within each platform's limits.
@@ -207,8 +211,7 @@ The journal generator stays as its own page.
   are shown next to the script, and they don't block the owner from approving it. A "skip
   review" toggle runs both stages in one go.
 - **Music:** no scraped or uncertain tracks. v1 uses tracks the owner adds to `assets/music/`
-  (any licence the owner holds) and can optionally generate a bed with ElevenLabs Music on a
-  plan that allows commercial use. If neither is available, the short renders with
+  (any licence the owner holds) and can later generate a bed with ElevenLabs Music (deferred, not in v1). If neither is available, the short renders with
   voice only and says so.
 - **Durability:** a lost render (phone locks, session drops) means tap again in v1. Each
   stage's output is cached on disk for the session, so a re-render doesn't redo the script.
