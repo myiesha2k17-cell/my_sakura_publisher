@@ -178,7 +178,14 @@ The journal generator stays as its own page.
   narration may still use the author's first-person voice for excerpts and reflections. The end
   card and CTA always point to the Hanako link in bio. Hashtags mix brand tags with tags
   suited to the book type.
-- **Catalog to start:** the owner's 2 published Amazon books.
+- **Catalog to start:** the owner's 2 published Amazon books, both Ren Hawthorne fiction:
+  *The Ledger* (Adebayo Ledger #1) and *The Ones Nobody Came For* (A Keeper Novel #1). The
+  draft entries are in `2026-11-20-starting-catalog-draft.md`, and the covers are in
+  `assets/covers/`. Ren's fiction is therefore the v1 focus. The other four voices get starter
+  profiles but no books yet.
+- **Voice provider:** the owner will sign up for ElevenLabs later. v1 is built and tested
+  against the provider interface with a fake TTS. Until a key is added, the app tells the
+  owner that voice is not configured and won't render.
 
 ## 8. Builder's calls (proposed defaults, owner may override)
 - Providers:
