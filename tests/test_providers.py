@@ -95,28 +95,29 @@ def test_cover_only_without_cover(tmp_path):
 
 
 def _stub_client(response, seen):
-    def parse(**kwargs):
+    def create(**kwargs):
         seen.update(kwargs)
         return response
-    return SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(parse=parse)))
+    return SimpleNamespace(beta=SimpleNamespace(messages=SimpleNamespace(create=create)))
 
 
 def test_anthropic_parse_uses_model_and_fallbacks():
     post = PostText(tiktok_caption="a", instagram_caption="b", youtube_title="c", youtube_description="d")
     seen = {}
-    client = _stub_client(SimpleNamespace(stop_reason="end_turn", parsed_output=post, stop_details=None), seen)
-    out = AnthropicLLM("key", "claude-opus-5-5", client=client).parse("sys", "user", PostText)
+    response = SimpleNamespace(stop_reason="end_turn", stop_details=None,
+                               content=[SimpleNamespace(type="text", text=post.model_dump_json())])
+    out = AnthropicLLM("key", "claude-opus-5-5", client=_stub_client(response, seen)).parse("sys", "user", PostText)
     assert out == post
-    assert seen["model"] == "claude-opus-5-5" and seen["output_format"] is PostText
+    assert seen["model"] == "claude-opus-5-5" and seen["output_config"]["format"]["type"] == "json_schema"
     assert seen["fallbacks"] == "default" and "server-side-fallback-2026-07-01" in seen["betas"]
     assert seen["system"] == "sys" and seen["messages"][0]["content"] == "user"
 
 
 def test_anthropic_refusal():
-    client = _stub_client(SimpleNamespace(stop_reason="refusal", parsed_output=None,
-                                          stop_details=SimpleNamespace(category="general_harms")), {})
+    response = SimpleNamespace(stop_reason="refusal", stop_details=SimpleNamespace(category="general_harms"),
+                               content=[])
     with pytest.raises(Refusal):
-        AnthropicLLM("key", "claude-opus-5-5", client=client).parse("s", "u", PostText)
+        AnthropicLLM("key", "claude-opus-5-5", client=_stub_client(response, {})).parse("s", "u", PostText)
 
 
 def test_make_providers_without_keys(monkeypatch):
