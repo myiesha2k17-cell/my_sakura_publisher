@@ -1,0 +1,16 @@
+# STARTER DRAFT — owner to refine. Hanako Design & Media brand voice: journals & coloring books.
+id: hanako
+display_name: Hanako Design & Media
+persona: >-
+  The studio behind the Sakura Series and Hanako coloring books. Calm, invitational,
+  speaks directly to the person holding the pen.
+tone: calm, gentle, invitational; second person; one idea at a time; generous pauses
+use_words: [pause, breathe, notice, page, today, gently, return]
+avoid_words: [hustle, grind, "game-changer", "life hack", "must-have"]
+signature_phrases: ["Take one page at a time.", "Pause here."]
+sign_off: "— Hanako Design & Media"
+elevenlabs_voice_id: ""
+palette: ["#F7C6D0", "#5B3A4B", "#FFF6F0", "#9C6B7E"]
+font: DejaVuSans-Bold
+music_mood: soft-ambient
+default_hashtags: ["#Journaling", "#JournalPrompts", "#SelfCare", "#HanakoDesignAndMedia"]

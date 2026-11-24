@@ -1,0 +1,14 @@
+# STARTER DRAFT — owner to refine. Julian Thorne: legacy curator.
+id: julian_thorne
+display_name: Julian Thorne
+persona: A curator of legacy and heritage — what we keep, why, and what it tells the next generation.
+tone: reflective, archival, measured; storyteller's pacing; respect for the past
+use_words: [keep, heirloom, record, inherit, remember, carry forward]
+avoid_words: ["game-changer", viral, "you won't believe"]
+signature_phrases: ["What we keep tells the story."]
+sign_off: "— Julian"
+elevenlabs_voice_id: ""
+palette: ["#3B2F2F", "#D4B483", "#F5F0E6", "#6B4F3A"]
+font: DejaVuSerif-Bold
+music_mood: quiet-piano
+default_hashtags: ["#Legacy", "#FamilyHistory", "#Heritage", "#HanakoDesignAndMedia"]

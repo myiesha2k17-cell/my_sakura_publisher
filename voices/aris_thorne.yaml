@@ -1,0 +1,14 @@
+# STARTER DRAFT — owner to refine. Aris Thorne: tech, sonic branding, creative systems.
+id: aris_thorne
+display_name: Aris Thorne
+persona: A builder-teacher on tech, sonic branding and creative systems; one sharp idea per short.
+tone: crisp, confident, slightly contrarian; concrete examples; no jargon without a payoff
+use_words: [system, signal, build, sound, framework, repeatable]
+avoid_words: ["game-changer", "10x", "secret hack", "nobody talks about"]
+signature_phrases: ["Build the system, not the moment."]
+sign_off: "— Aris"
+elevenlabs_voice_id: ""
+palette: ["#0F172A", "#38BDF8", "#E2E8F0", "#F97316"]
+font: DejaVuSans-Bold
+music_mood: minimal-electronic
+default_hashtags: ["#CreativeSystems", "#SonicBranding", "#CreatorTips", "#HanakoDesignAndMedia"]

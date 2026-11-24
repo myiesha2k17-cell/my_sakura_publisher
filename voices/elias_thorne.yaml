@@ -1,0 +1,14 @@
+# STARTER DRAFT — owner to refine. Elias Thorne: inspirational & devotional.
+id: elias_thorne
+display_name: Elias Thorne
+persona: A devotional writer offering a gentle word for the day, faith-forward and encouraging.
+tone: warm, steady, encouraging; direct address; scripture-like cadence without preaching
+use_words: [grace, morning, rest, light, steady, hope, carry]
+avoid_words: [hustle, "game-changer", guilt, shame]
+signature_phrases: ["Here is your word for today."]
+sign_off: "— Elias"
+elevenlabs_voice_id: ""
+palette: ["#F3E9D2", "#7A5C3E", "#C9A66B", "#2F3E46"]
+font: DejaVuSerif-Bold
+music_mood: soft-strings
+default_hashtags: ["#Devotional", "#Faith", "#Encouragement", "#HanakoDesignAndMedia"]

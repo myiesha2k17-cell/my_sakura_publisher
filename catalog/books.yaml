@@ -1,0 +1,86 @@
+# Hanako Design & Media — book catalog for Shorts Studio.
+# Approved by the owner 2026-11-20. Quotes are verbatim from the manuscripts.
+# Sakura journals are added automatically from data/sakura_*_prompts.csv.
+
+- id: the_ledger
+  title: The Ledger
+  series: An Adebayo Ledger Novel, Book One
+  author: Ren Hawthorne
+  voice: ren_hawthorne
+  book_type: fiction
+  amazon_url: https://a.co/d/0dXjLJ2d
+  cover: assets/covers/the_ledger.jpg
+  blurb: >-
+    Yemi Adebayo spent thirty years as a bank underwriter. Every number checked twice.
+    Every promise in writing. Nothing owed that wasn't itemized. Two years after her
+    mother's death, the one account she still hasn't closed is the locked shrine room at
+    the end of the hall. Behind the door she finds her mother's ledger: dates, names, and
+    debts paid in something other than money. The oldest entry was written the night Yemi
+    was born. Her mother's bargain with Èṣù still reads Terms: pending.
+  tropes:
+    - inherited ledger of debts to the gods
+    - Yoruba orisha in modern Atlanta
+    - a heroine over 50 starting over
+    - mother–daughter–granddaughter
+    - a skeptic forced to believe
+    - bargains with a price nobody wrote down
+    - first in a series
+  quotes:
+    - "You can build a life on proof, and still owe something you can't prove exists."
+    - "Someone who's owed an answer."
+    - "Carefulness, it turned out, was not the same thing as tending."
+    - "Not superstition. Bookkeeping."
+    - "Decoration was for people trying to hide what they actually wanted."
+    - "She wrote pending."
+    - "Ledger. F. Adebayo. Entry 0010. Debtor: F. Adebayo. Counterparty: Èṣù. Terms: pending."
+  do_not_say:
+    - how the Èṣù debt is resolved
+    - anything from the later chapters or the ending
+    - the Ọṣun / river-spirit thread set up for Book Two
+    - calling the book horror
+  hashtags: ["#BookTok", "#FantasyBooks", "#UrbanFantasy", "#BlackFantasy", "#Orisha",
+             "#MythologyRetelling", "#BooksWithOlderHeroines", "#NewRelease", "#HanakoDesignAndMedia"]
+
+- id: the_ones_nobody_came_for
+  title: The Ones Nobody Came For
+  series: A Keeper Novel
+  author: Ren Hawthorne
+  voice: ren_hawthorne
+  book_type: fiction
+  amazon_url: https://a.co/d/0aPWMork
+  cover: assets/covers/the_ones_nobody_came_for.jpg
+  blurb: >-
+    Sixteen-year-old Wren has been through five foster placements. She has learned to fit
+    her life into two bags and never be the one who goes back to the car. Her sixth
+    placement is a run-down fairgrounds in Nickel Falls, Ohio. There a woman named Roz runs
+    a sanctuary for creatures nobody else would take: a grey giant who won't sleep, a blind
+    resident who walks only his route, retired message birds the fax machine made obsolete,
+    and a hound working a fence line for something no one can name. Wren has a secret. When
+    she touches an animal, she knows what it feels. She has never told anyone. At the
+    Fairgrounds, for the first time, it might be useful.
+  tropes:
+    - found family
+    - magical creature sanctuary
+    - foster kid finds a place
+    - gruff caretaker with rules
+    - animal empathy
+    - small-town Ohio
+    - quiet fantasy
+    - first in a series
+  quotes:
+    - "Feed's at five thirty in the morning and four thirty at night. That's not flexible. Everything else is flexible."
+    - "So the lights come on first and then we come in."
+    - "Because it's the first thing that happens to them every day and it should be their idea."
+    - "Two is what you can carry in one trip."
+    - '"What''s in the barns?" "Residents."'
+    - "TOGETHER. ALWAYS. NO EXCEPTIONS."
+    - "Then somebody invented the fax machine, and then somebody invented everything else."
+    - "You put the barrow where the next person would want it. Twice. People don't do that until about year three."
+    - "Hello, um. Is the courser real. Because my brother says it's real and my other brother says it's a horse with something wrong with it, and we have a bet."
+  do_not_say:
+    - what happens to Bishop
+    - what Junie is searching for
+    - the ending (the calendar / birthday scene)
+    - anything after chapter 3 unless approved
+  hashtags: ["#BookTok", "#CozyFantasy", "#FoundFamily", "#FantasyBooks", "#CozyReads",
+             "#MagicalCreatures", "#NewRelease", "#HanakoDesignAndMedia"]
