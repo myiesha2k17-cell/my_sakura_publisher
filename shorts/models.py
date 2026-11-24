@@ -47,3 +47,12 @@ class WordTiming(BaseModel):
     word: str
     start: float
     end: float
+
+
+class Format(BaseModel):
+    id: str
+    name: str
+    book_types: list[BookType]
+    beats: list[str]
+    target_seconds: tuple[int, int]
+    instructions: str
