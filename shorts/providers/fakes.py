@@ -58,3 +58,24 @@ class FakeImageGen:
         out_path.parent.mkdir(parents=True, exist_ok=True)
         Image.new("RGB", (1024, 1536), self.color).save(out_path)
         return out_path
+
+
+class DemoLLM:
+    """Offline script writer for SHORTS_FAKE_PROVIDERS demos: builds a plausible script from the prompt itself."""
+
+    def parse(self, system, user, schema):
+        from shorts.models import GuardrailReview, PostText, Scene, ScriptDraft
+
+        if schema is GuardrailReview:
+            return GuardrailReview()
+        beats_line = next((l for l in user.splitlines() if l.startswith("Scenes, in order, one per beat:")), "")
+        beats = [b.strip() for b in beats_line.split(":", 1)[-1].split(",") if b.strip()] or ["hook", "cta"]
+        title = next((l.split(":", 1)[1].strip() for l in user.splitlines() if l.startswith("Book:")), "this book")
+        scenes = [
+            Scene(role=beat, narration=f"Demo line {i + 1} for {title}.", on_screen_text=f"{beat.replace('_', ' ')}",
+                  image_prompt=f"moody scene {i + 1}", seconds=4.0)
+            for i, beat in enumerate(beats)
+        ]
+        post = PostText(tiktok_caption=f"Demo caption for {title}", instagram_caption=f"Demo caption for {title}",
+                        youtube_title=f"{title} (demo)", youtube_description="Demo description.")
+        return ScriptDraft(hook=f"Demo hook for {title}", scenes=scenes, cta="Link in bio.", post=post)
